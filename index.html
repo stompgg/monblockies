@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>monblockies</title>
+  <link id="favicon" rel="icon" type="image/png" />
+  <script src="monblockies.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #08090a;
+      color: #b0b8c0;
+      font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+      padding: 32px 28px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #container {
+      width: 100%;
+      max-width: 1400px;
+    }
+
+    /* ── Controls ── */
+    #controls {
+      display: flex;
+      gap: 12px;
+      align-items: flex-end;
+      margin-bottom: 32px;
+      justify-content: center;
+    }
+    .field-label {
+      font-size: 10px;
+      font-weight: 500;
+      color: #707880;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    #addr-input {
+      background: transparent;
+      border: 1px solid #252a30;
+      border-radius: 2px;
+      color: #c0c8d0;
+      padding: 8px 12px;
+      font-size: 12px;
+      font-family: 'SF Mono', 'Consolas', monospace;
+      width: 260px;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    #addr-input:focus { border-color: #404850; }
+    #addr-input::placeholder { color: #383e44; }
+    #randomize-btn {
+      background: transparent;
+      border: 1px solid #252a30;
+      border-radius: 2px;
+      color: #909498;
+      padding: 8px 16px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    #randomize-btn:hover {
+      border-color: #404850;
+      color: #c0c8d0;
+    }
+
+    /* ── Main 3-column layout ── */
+    #main {
+      display: flex;
+      gap: 40px;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+    /* ── Preview pane (column 1) ── */
+    #preview-pane { flex-shrink: 0; width: 160px; }
+    .pane-label {
+      font-size: 10px;
+      font-weight: 500;
+      color: #606870;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    #preview-frame {
+      background: #0c0d0e;
+      border: 1px solid #1a1d20;
+      padding: 16px;
+      display: inline-block;
+    }
+    #preview-frame canvas { display: block; }
+
+    #palette-chips {
+      margin-top: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .chip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .chip-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 1px;
+      flex-shrink: 0;
+    }
+    .chip-label {
+      font-size: 10px;
+      font-weight: 500;
+      color: #707880;
+      letter-spacing: 0.3px;
+    }
+    #preview-addr {
+      margin-top: 14px;
+      font-size: 10px;
+      font-family: 'SF Mono', 'Consolas', monospace;
+      color: #484e54;
+      max-width: 160px;
+      word-break: break-all;
+      line-height: 1.5;
+    }
+
+    /* ── Gallery (column 2) ── */
+    #gallery-pane { flex: 1; min-width: 400px; max-width: 560px; }
+    #gallery {
+      display: grid;
+      grid-template-columns: repeat(14, 1fr);
+      gap: 3px;
+      line-height: 0;
+    }
+    .gallery-item {
+      cursor: pointer;
+      position: relative;
+      z-index: 0;
+      opacity: 0.92;
+      transition: opacity 0.1s;
+    }
+    .gallery-item:hover {
+      opacity: 1;
+      outline: 1px solid #505860;
+      outline-offset: 0px;
+      z-index: 1;
+    }
+    .gallery-item canvas { display: block; width: 100%; height: auto; }
+
+    /* ── All palettes (column 3) ── */
+    #palettes-pane { flex-shrink: 0; width: 380px; }
+    #palettes-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 8px;
+    }
+    .palette-item {
+      text-align: center;
+    }
+    .palette-item canvas {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .palette-name {
+      font-size: 9px;
+      font-weight: 500;
+      color: #585e64;
+      margin-top: 5px;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+    }
+
+    /* ── Mobile: single column ── */
+    @media (max-width: 900px) {
+      body { padding: 24px 20px; }
+      #main {
+        flex-direction: column;
+        align-items: center;
+        gap: 32px;
+      }
+      #preview-pane {
+        width: 100%;
+        max-width: 400px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      #gallery-pane {
+        width: 100%;
+        min-width: unset;
+        max-width: 100%;
+      }
+      #gallery {
+        grid-template-columns: repeat(10, 1fr);
+      }
+      #palettes-pane {
+        width: 100%;
+        max-width: 100%;
+      }
+      #palettes-grid {
+        grid-template-columns: repeat(6, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      body { padding: 16px; }
+      #controls {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
+      }
+      #addr-input { width: 100%; }
+      #randomize-btn { width: 100%; padding: 10px 16px; }
+      #gallery {
+        grid-template-columns: repeat(7, 1fr);
+      }
+      #palettes-grid {
+        grid-template-columns: repeat(5, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+
+    <div id="controls">
+      <div>
+        <div class="field-label">ADDRESS</div>
+        <input id="addr-input" type="text" placeholder="0x… or any string" />
+      </div>
+      <button id="randomize-btn">⟳ RANDOMIZE</button>
+    </div>
+
+    <div id="main">
+    <div id="preview-pane">
+      <div class="pane-label">PREVIEW</div>
+      <div id="preview-frame">
+        <canvas id="preview-canvas"></canvas>
+      </div>
+      <div id="palette-chips"></div>
+      <div id="preview-addr"></div>
+    </div>
+
+    <div id="gallery-pane">
+      <div class="pane-label">GALLERY</div>
+      <div id="gallery"></div>
+    </div>
+
+    <div id="palettes-pane">
+      <div class="pane-label">ALL 42 PALETTES</div>
+      <div id="palettes-grid"></div>
+    </div>
+  </div>
+  </div>
+
+  <script>
+    // ── State ──────────────────────────────────────────────────────────────────
+    var CELL = 2;
+    var GALLERY_COLS = 14;
+    var GALLERY_ROWS = 14;
+    var GALLERY_COUNT = GALLERY_COLS * GALLERY_ROWS; // 98 - fills all rows
+
+    var state = {
+      seed:     0,
+      selected: null,
+      custom:   '',
+    };
+
+    // ── Address generation ─────────────────────────────────────────────────────
+    function galleryAddrs(seed) {
+      var rng = MonBlockies.seedRng('gallery_seed_' + seed);
+      var out = [];
+      for (var i = 0; i < GALLERY_COUNT; i++) {
+        var hex = '0x';
+        for (var j = 0; j < 12; j++) hex += Math.floor(rng() * 16).toString(16);
+        out.push(hex);
+      }
+      return out;
+    }
+
+    // ── Palette chips ──────────────────────────────────────────────────────────
+    var CHIP_DEFS = [
+      { key: 'outline', label: 'OUTLINE'   },
+      { key: 'body',    label: 'BODY'      },
+      { key: 'hi',      label: 'HIGHLIGHT' },
+      { key: 'mark',    label: 'MARKING'   },
+      { key: 'eye',     label: 'EYE'       },
+      { key: null,      label: 'SHINE',  color: '#ffffff' },
+    ];
+
+    function renderChips(pal) {
+      var el = document.getElementById('palette-chips');
+      el.innerHTML = '';
+      CHIP_DEFS.forEach(function (def) {
+        var color = def.color || pal[def.key];
+        var div = document.createElement('div');
+        div.className = 'chip';
+        var dot = document.createElement('div');
+        dot.className = 'chip-dot';
+        dot.style.background = color;
+        var lbl = document.createElement('span');
+        lbl.className = 'chip-label';
+        lbl.textContent = def.label;
+        div.appendChild(dot);
+        div.appendChild(lbl);
+        el.appendChild(div);
+      });
+    }
+
+    // ── Preview ────────────────────────────────────────────────────────────────
+    function updatePreview(addr) {
+      var canvas = document.getElementById('preview-canvas');
+      MonBlockies.render(canvas, addr, 32);
+      canvas.style.width  = '128px';
+      canvas.style.height = '128px';
+      canvas.style.imageRendering = 'pixelated';
+
+      var sprite = MonBlockies.generate(addr);
+      renderChips(sprite.pal);
+
+      document.getElementById('preview-addr').textContent = addr;
+
+      // Update favicon to match selected blockie (transparent background)
+      document.getElementById('favicon').href = MonBlockies.toDataURL(addr, 32, null, true);
+    }
+
+    // ── Gallery ────────────────────────────────────────────────────────────────
+    function buildGallery(addrs, focusAddr) {
+      var gallery = document.getElementById('gallery');
+      gallery.innerHTML = '';
+
+      addrs.forEach(function (addr) {
+        var wrap = document.createElement('div');
+        wrap.className = 'gallery-item' + (addr === focusAddr ? ' selected' : '');
+        wrap.dataset.addr = addr;
+
+        var canvas = document.createElement('canvas');
+        MonBlockies.render(canvas, addr, CELL * 16);
+        canvas.style.imageRendering = 'pixelated';
+
+        wrap.appendChild(canvas);
+        wrap.addEventListener('click', function () {
+          state.selected = addr;
+          render();
+        });
+        gallery.appendChild(wrap);
+      });
+    }
+
+    // ── All Palettes Grid ──────────────────────────────────────────────────────
+    function buildPalettesGrid(addr) {
+      var grid = document.getElementById('palettes-grid');
+      grid.innerHTML = '';
+      MonBlockies.PALETTES.forEach(function (pal, i) {
+        var item = document.createElement('div');
+        item.className = 'palette-item';
+
+        var canvas = MonBlockies.createCanvas(addr, 48, i);
+        canvas.style.imageRendering = 'pixelated';
+
+        var name = document.createElement('div');
+        name.className = 'palette-name';
+        name.textContent = pal.name;
+
+        item.appendChild(canvas);
+        item.appendChild(name);
+        grid.appendChild(item);
+      });
+    }
+
+    // ── Full render ────────────────────────────────────────────────────────────
+    function render() {
+      var addrs   = galleryAddrs(state.seed);
+      var custom  = state.custom.trim();
+      var list    = custom ? [custom].concat(addrs.slice(0, GALLERY_COUNT - 1)) : addrs;
+      var focus   = state.selected || list[0];
+
+      updatePreview(focus);
+      buildGallery(list, focus);
+      buildPalettesGrid(focus);
+    }
+
+    // ── Controls ───────────────────────────────────────────────────────────────
+    document.getElementById('randomize-btn').addEventListener('click', function () {
+      state.seed++;
+      state.selected = null;
+      render();
+    });
+
+    document.getElementById('addr-input').addEventListener('input', function (e) {
+      state.custom   = e.target.value;
+      state.selected = null;
+      render();
+    });
+
+    // ── Favicon ─────────────────────────────────────────────────────────────────
+    document.getElementById('favicon').href = MonBlockies.toDataURL('monblockies', 32, null, true);
+
+    // ── Init ───────────────────────────────────────────────────────────────────
+    render();
+  </script>
+</body>
+</html>

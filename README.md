@@ -74,11 +74,10 @@ var sprite = monblockies.generate('0xdeadbeef');
 
 Each address is hashed with a djb2-style XOR hash and fed into an XOR-shift RNG to determine:
 
-1. **Palette** — one of 32 hand-crafted DS-era RPG palettes (16 saturated, 10 muted, 6 grayscale/special).
-2. **Silhouette** — a 32-point polar radius profile, smoothed and optionally spiked (3–7 spikes, 55% of creatures).
-3. **Body detail** — two independent 5×5 bilinear noise grids classify interior pixels as body, highlight, or marking.
-4. **Contour** — any body pixel adjacent to the background becomes an outline pixel (cel-shade edge detection).
-5. **Eyes** — placed on the widest interior row in the upper 62% of the sprite. 25% of creatures are cyclops; 75% have two eyes with a small random vertical drift. Each eye gets a 1-pixel specular shine.
+1. **Silhouette** — a 32-point polar radius profile, smoothed and optionally spiked (3–7 spikes, 55% of creatures).
+2. **Body detail** — two independent 5×5 bilinear noise grids classify interior pixels as body, highlight, or marking.
+3. **Contour** — any body pixel adjacent to the background becomes an outline pixel (cel-shade edge detection).
+4. **Eyes** — placed on the widest interior row in the upper 62% of the sprite. 25% of creatures are cyclops; 75% have two eyes with a small random vertical drift. Each eye gets a 1-pixel specular shine.
 
 ---
 

@@ -1,4 +1,4 @@
-# MonBlockies
+# monblockies
 
 Deterministic pixel-art mini monster avatar generator. Maps to a unique 16×16 creature with a consistent palette, silhouette, and eyes.
 
@@ -9,7 +9,7 @@ Deterministic pixel-art mini monster avatar generator. Maps to a unique 16×16 c
 ```html
 <script src="monblockies.js"></script>
 <script>
-  var canvas = MonBlockies.createCanvas('0xdeadbeef', 64);
+  var canvas = monblockies.createCanvas('0xdeadbeef', 64);
   document.body.appendChild(canvas);
 </script>
 ```
@@ -18,13 +18,13 @@ Deterministic pixel-art mini monster avatar generator. Maps to a unique 16×16 c
 
 ## API
 
-### `MonBlockies.createCanvas(addr, size?, paletteIdx?)`
+### `monblockies.createCanvas(addr, size?, paletteIdx?)`
 
 Creates and returns a `<canvas>` element with the sprite already painted.
 
 ```js
 // 64×64 canvas, palette auto-selected from the address
-var canvas = MonBlockies.createCanvas('0xdeadbeef', 64);
+var canvas = monblockies.createCanvas('0xdeadbeef', 64);
 document.getElementById('avatar').replaceWith(canvas);
 ```
 
@@ -36,33 +36,33 @@ document.getElementById('avatar').replaceWith(canvas);
 
 ---
 
-### `MonBlockies.render(canvas, addr, size?, paletteIdx?)`
+### `monblockies.render(canvas, addr, size?, paletteIdx?)`
 
 Paints a sprite into an **existing** canvas element. Use this when you manage the canvas yourself (e.g. inside a component lifecycle).
 
 ```js
 var canvas = document.getElementById('my-canvas');
-MonBlockies.render(canvas, '0xdeadbeef', 64);
+monblockies.render(canvas, '0xdeadbeef', 64);
 ```
 
 ---
 
-### `MonBlockies.toDataURL(addr, size?, paletteIdx?)`
+### `monblockies.toDataURL(addr, size?, paletteIdx?)`
 
 Returns a PNG data URL. Useful for `<img src>`, saving to disk, or uploading.
 
 ```js
-document.getElementById('avatar').src = MonBlockies.toDataURL('alice', 64);
+document.getElementById('avatar').src = monblockies.toDataURL('alice', 64);
 ```
 
 ---
 
-### `MonBlockies.generate(addr, paletteIdx?)`
+### `monblockies.generate(addr, paletteIdx?)`
 
 Returns raw sprite data without touching the DOM. Useful for server-side rendering with node-canvas, or pre-warming a cache.
 
 ```js
-var sprite = MonBlockies.generate('0xdeadbeef');
+var sprite = monblockies.generate('0xdeadbeef');
 // sprite.pixels  → Uint8Array of pixel types (16×16)
 // sprite.pal     → palette object { bg, outline, body, hi, eye, mark, name }
 // sprite.G       → grid size (always 16)

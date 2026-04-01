@@ -36,29 +36,32 @@
     // Saturated - evenly distributed around hue wheel
     { name:'Scarlet',  bg:'#0c0404', outline:'#f04848', body:'#d01010', hi:'#ff3030', eye:'#a0ffe0', mark:'#800808' },
     { name:'Ember',    bg:'#0c0604', outline:'#e07050', body:'#d03808', hi:'#ff6030', eye:'#a0fff0', mark:'#901c04' },
-    { name:'Cinder',   bg:'#0c0604', outline:'#d07050', body:'#a83010', hi:'#e05028', eye:'#a0fff0', mark:'#601808' },
+    { name:'Tangerine',bg:'#0c0804', outline:'#e8b030', body:'#c09010', hi:'#f8c828', eye:'#90c0ff', mark:'#785010' },
     { name:'Inferno',  bg:'#0c0804', outline:'#e0a048', body:'#d87000', hi:'#ffb020', eye:'#a0ffff', mark:'#904800' },
     { name:'Canary',   bg:'#0c0c04', outline:'#e0e040', body:'#c8c000', hi:'#f8f020', eye:'#a0c8ff', mark:'#787000' },
     { name:'Blight',   bg:'#0a0a04', outline:'#c8d048', body:'#889000', hi:'#c8e010', eye:'#a0d8ff', mark:'#505800' },
-    { name:'Citrus',   bg:'#080c04', outline:'#b8e830', body:'#80c800', hi:'#a8f010', eye:'#b0a0ff', mark:'#508000' },
-    { name:'Lime',     bg:'#080c04', outline:'#a8e040', body:'#70b800', hi:'#98e018', eye:'#c0a0ff', mark:'#487000' },
-    { name:'Toxic',    bg:'#060c04', outline:'#60e048', body:'#30c010', hi:'#58f838', eye:'#d8b0ff', mark:'#1c7808' },
-    { name:'Slime',    bg:'#040c04', outline:'#50d860', body:'#18a028', hi:'#48e050', eye:'#f0c0ff', mark:'#0c6010' },
-    { name:'Spring',   bg:'#040c06', outline:'#40e070', body:'#10b848', hi:'#38f068', eye:'#ffa0e0', mark:'#087028' },
-    { name:'Mint',     bg:'#040c08', outline:'#40e090', body:'#10c060', hi:'#30f080', eye:'#ffa0d0', mark:'#087838' },
-    { name:'Lagoon',   bg:'#040c0a', outline:'#40d8b8', body:'#08a888', hi:'#28e0b8', eye:'#ffc0e0', mark:'#046050' },
-    { name:'Depths',   bg:'#040a0c', outline:'#40c0d8', body:'#0890a8', hi:'#20c8e0', eye:'#ffc0d0', mark:'#045060' },
-    { name:'Frost',    bg:'#040810', outline:'#50a0e0', body:'#1870c0', hi:'#50b0f0', eye:'#ffe0b0', mark:'#0c4080' },
-    { name:'Abyss',    bg:'#040610', outline:'#5070e0', body:'#1040c0', hi:'#3060f0', eye:'#ffe0c0', mark:'#082070' },
-    { name:'Indigo',   bg:'#040810', outline:'#6058e0', body:'#3028d0', hi:'#5048f8', eye:'#f0ffa0', mark:'#181080' },
-    { name:'Grape',    bg:'#06040c', outline:'#7848e8', body:'#4818d8', hi:'#6838f8', eye:'#e8ffa0', mark:'#280898' },
-    { name:'Void',     bg:'#08040c', outline:'#9050e0', body:'#5818c0', hi:'#8848f0', eye:'#f0ffc0', mark:'#380c80' },
-    { name:'Miasma',   bg:'#08040c', outline:'#b048e0', body:'#8018c0', hi:'#a838f0', eye:'#e0ffb0', mark:'#500880' },
+    { name:'Chartreuse',bg:'#080c04', outline:'#80e838', body:'#58c018', hi:'#90f048', eye:'#d0a0ff', mark:'#307010' },
+    { name:'Violet',   bg:'#08040c', outline:'#9858e0', body:'#6828c0', hi:'#a868f0', eye:'#d8ffa0', mark:'#401080' },
+    { name:'Peach',    bg:'#0c0806', outline:'#e8a878', body:'#c87848', hi:'#f8b888', eye:'#a0e8ff', mark:'#804830' },
+    { name:'Blush',    bg:'#0c0408', outline:'#e86088', body:'#c83060', hi:'#f87898', eye:'#a0ffd0', mark:'#802040' },
+    { name:'Spring',   bg:'#060c08', outline:'#68f898', body:'#38d870', hi:'#80ffa8', eye:'#ffc0e8', mark:'#28a050' },
+    { name:'Sapphire', bg:'#04040a', outline:'#4090e0', body:'#1068c0', hi:'#58a8f0', eye:'#f8c8a0', mark:'#084880' },
+    { name:'Honey',    bg:'#0c0a04', outline:'#d8b848', body:'#a88818', hi:'#f0d050', eye:'#a0c8ff', mark:'#685010' },
+    { name:'Depths',   bg:'#020608', outline:'#288898', body:'#085868', hi:'#38a0b0', eye:'#f0b8c8', mark:'#023848' },
+    { name:'Frost',    bg:'#060a10', outline:'#78c8f8', body:'#40a0e0', hi:'#90d8ff', eye:'#fff0c0', mark:'#2080c0' },
+    { name:'Abyss',    bg:'#020308', outline:'#3048a0', body:'#0c2870', hi:'#2040a8', eye:'#d0c8a0', mark:'#041040' },
+    { name:'Indigo',   bg:'#030510', outline:'#4840b8', body:'#2018a0', hi:'#3830d0', eye:'#e0f0a0', mark:'#100860' },
+    { name:'Turquoise',bg:'#040a0a', outline:'#40c8c8', body:'#08a0a0', hi:'#50e8e8', eye:'#f8c0a0', mark:'#046060' },
+    { name:'Void',     bg:'#06030a', outline:'#6038a0', body:'#381070', hi:'#5828a8', eye:'#c8f0a0', mark:'#200850' },
+    { name:'Maroon',   bg:'#0a0404', outline:'#a85858', body:'#802828', hi:'#c86868', eye:'#a0f0e0', mark:'#501818' },
     { name:'Orchid',   bg:'#0a040a', outline:'#d040d0', body:'#a010a8', hi:'#d030d8', eye:'#c0ffc0', mark:'#600868' },
-    { name:'Magma',    bg:'#0a0408', outline:'#d048c0', body:'#a01090', hi:'#e030c0', eye:'#c0ffa0', mark:'#600858' },
-    { name:'Coral',    bg:'#0c040a', outline:'#e050a0', body:'#c01878', hi:'#f048a8', eye:'#c0ffc0', mark:'#800c50' },
-    { name:'Rose',     bg:'#0c0408', outline:'#f05080', body:'#d82060', hi:'#f84888', eye:'#a0ffc0', mark:'#881038' },
-    { name:'Crimson',  bg:'#0c0404', outline:'#e05060', body:'#c00020', hi:'#ff2040', eye:'#c0ffe0', mark:'#700010' },
+    { name:'Teal',     bg:'#040c08', outline:'#30d098', body:'#10a870', hi:'#48e8a8', eye:'#ffa0c0', mark:'#086040' },
+    { name:'Coral',    bg:'#0c0608', outline:'#f888c0', body:'#e048a0', hi:'#ffa0d0', eye:'#c0ffd0', mark:'#a82878' },
+    { name:'Azure',    bg:'#04080c', outline:'#28a8e0', body:'#0878b8', hi:'#40c0f8', eye:'#ffd0a0', mark:'#044068' },
+    { name:'Crimson',  bg:'#080303', outline:'#a03848', body:'#801020', hi:'#c02838', eye:'#a0e8d0', mark:'#500010' },
+    { name:'Fern',     bg:'#080c04', outline:'#98e850', body:'#70c028', hi:'#b0f860', eye:'#c0a0ff', mark:'#488010' },
+    { name:'Forest',   bg:'#030804', outline:'#308048', body:'#185028', hi:'#409858', eye:'#f8c0d8', mark:'#0c3018' },
+    { name:'Wine',     bg:'#080306', outline:'#904068', body:'#602040', hi:'#a85078', eye:'#c0f8d8', mark:'#401028' },
     // Muted
     { name:'Rust',     bg:'#0a0705', outline:'#c07e59', body:'#8f4114', hi:'#d2692d', eye:'#bef4ec', mark:'#59290d' },
     { name:'Iron',     bg:'#05080a', outline:'#6a98af', body:'#395a6a', hi:'#668899', eye:'#f4bec7', mark:'#243842' },
@@ -69,15 +72,18 @@
     { name:'Tallow',   bg:'#0a0906', outline:'#aca26c', body:'#766d42', hi:'#a19972', eye:'#bee2f4', mark:'#4e492c' },
     { name:'Jade',     bg:'#050a09', outline:'#61b89e', body:'#33715e', hi:'#5ca38e', eye:'#f4bee9', mark:'#20463b' },
     { name:'Foam',     bg:'#050909', outline:'#68a8a8', body:'#3a7878', hi:'#68a0a0', eye:'#f4c8c8', mark:'#204848' },
-    { name:'Blossom',  bg:'#0c0608', outline:'#d88090', body:'#c05068', hi:'#e88898', eye:'#b0ffc8', mark:'#803040' },
+    { name:'Olive',    bg:'#08080a', outline:'#a0a868', body:'#707840', hi:'#b8c078', eye:'#c8b8f8', mark:'#484820' },
     { name:'Lavender', bg:'#08050a', outline:'#8c68b1', body:'#7a53a2', hi:'#a895bb', eye:'#f4f4be', mark:'#5c3e79' },
+    { name:'Bronze',   bg:'#0a0806', outline:'#a08058', body:'#705030', hi:'#b89068', eye:'#b8e8f0', mark:'#483020' },
+    { name:'Rose',     bg:'#0a0608', outline:'#c89098', body:'#986070', hi:'#d8a0a8', eye:'#c0f0d8', mark:'#684048' },
     // Grayscale / near-white
     { name:'Ash',      bg:'#080808', outline:'#989898', body:'#505050', hi:'#787878', eye:'#e0e0e0', mark:'#303030' },
     { name:'Pitch',    bg:'#040606', outline:'#708888', body:'#283838', hi:'#486060', eye:'#a0f0e8', mark:'#141c1c' },
     { name:'Obsidian', bg:'#040410', outline:'#6878b8', body:'#1c2858', hi:'#384880', eye:'#90b0ff', mark:'#101830' },
-    { name:'Sulfur',   bg:'#0c0c04', outline:'#d8d850', body:'#b8b800', hi:'#f0f018', eye:'#a0d0ff', mark:'#707000' },
-    { name:'Amber',    bg:'#0c0804', outline:'#e0a050', body:'#d87800', hi:'#ffa830', eye:'#a0ffff', mark:'#905000' },
+    { name:'Steel',    bg:'#06080a', outline:'#7090a8', body:'#4a6070', hi:'#8aacb8', eye:'#f8d8c0', mark:'#304048' },
+    { name:'Cobalt',   bg:'#04040c', outline:'#4878e8', body:'#1850c8', hi:'#5890f8', eye:'#f8e0a0', mark:'#0c3080' },
     { name:'Ivory',    bg:'#0c0c0a', outline:'#b0b098', body:'#c8c8a8', hi:'#e8e8d8', eye:'#80c8ff', mark:'#909078' },
+    { name:'Snow',     bg:'#080a0c', outline:'#c8d8e8', body:'#a8c0d8', hi:'#e0f0ff', eye:'#f8d898', mark:'#7898b0' },
   ];
 
   // Pre-parse RGB values for each palette (avoids hex parsing on every render)
@@ -126,9 +132,11 @@
 
     var G   = 16;
     var rng = makeRng(addr);
+    // Always consume rng() for palette to keep silhouette consistent
+    var palRng = rng();
     var pal = (paletteIdx != null)
       ? PALETTES[paletteIdx]
-      : PALETTES[Math.floor(rng() * PALETTES.length)];
+      : PALETTES[Math.floor(palRng * PALETTES.length)];
     var cx  = (G - 1) / 2, cy = (G - 1) / 2;
 
     // Polar silhouette profile (typed arrays)

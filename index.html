@@ -13,188 +13,350 @@
       background: #0a0a0b;
       color: #b0b8c0;
       font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
-      padding: 40px 32px;
+      padding: 0;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      align-items: center;
     }
 
     #container {
+      flex: 1;
       width: 100%;
       max-width: 1400px;
-    }
-
-    /* ── Header ── */
-    #header {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-    #header h1 {
-      font-size: 11px;
-      font-weight: 500;
-      color: #808890;
-      letter-spacing: 3px;
-      text-transform: uppercase;
+      margin: 0 auto;
+      padding: 48px 40px;
     }
 
     /* ── Controls ── */
     #controls {
       display: flex;
-      gap: 10px;
+      gap: 12px;
       align-items: flex-end;
-      margin-bottom: 40px;
+      margin-bottom: 48px;
       justify-content: center;
     }
     .field-label {
       font-size: 10px;
       font-weight: 500;
-      color: #909498;
+      color: #808488;
       letter-spacing: 0.5px;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
     #addr-input {
       background: transparent;
-      border: 1px solid #303438;
+      border: 1px solid #252830;
       border-radius: 0;
-      color: #c0c4c8;
-      padding: 9px 12px;
+      color: #c8ccd0;
+      padding: 10px 14px;
       font-size: 12px;
       font-family: 'SF Mono', 'Consolas', monospace;
-      width: 280px;
+      width: 300px;
       outline: none;
-      transition: border-color 0.2s;
+      transition: border-color 0.25s, box-shadow 0.25s;
     }
-    #addr-input:focus { border-color: #505458; }
-    #addr-input::placeholder { color: #606468; }
+    #addr-input:focus {
+      border-color: #404448;
+      box-shadow: 0 0 0 3px rgba(255,255,255,0.03);
+    }
+    #addr-input::placeholder { color: #484c50; }
     #randomize-btn {
       background: transparent;
-      border: 1px solid #303438;
+      border: 1px solid #252830;
       border-radius: 0;
-      color: #909498;
-      padding: 9px 14px;
+      color: #808488;
+      padding: 10px 18px;
       cursor: pointer;
       font-family: inherit;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.3px;
-      transition: border-color 0.2s, color 0.2s;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: all 0.2s;
     }
     #randomize-btn:hover {
-      border-color: #505458;
-      color: #c0c4c8;
+      border-color: #404448;
+      color: #c8ccd0;
+      background: rgba(255,255,255,0.02);
+    }
+    #randomize-btn:active {
+      transform: scale(0.98);
     }
 
     /* ── Main 3-column layout ── */
     #main {
       display: flex;
-      gap: 48px;
+      gap: 56px;
       align-items: flex-start;
       justify-content: center;
     }
 
     /* ── Preview pane (column 1) ── */
-    #preview-pane { flex-shrink: 0; width: 160px; }
-    #preview-frame {
-      background: #0e0f10;
-      padding: 16px;
-      display: inline-block;
+    #preview-pane {
+      flex-shrink: 0;
+      width: 180px;
     }
-    #preview-frame canvas { display: block; }
+    #preview-section {
+      position: relative;
+    }
+    #preview-frame {
+      background: #0c0d0e;
+      border: 1px solid #1a1c1e;
+      padding: 24px;
+      display: inline-block;
+      position: relative;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+    }
+    #preview-frame canvas {
+      display: block;
+    }
+    #palette-name {
+      margin-top: 16px;
+      font-size: 18px;
+      font-weight: 300;
+      color: #e0e4e8;
+      letter-spacing: 1px;
+    }
+    #palette-index {
+      font-size: 10px;
+      font-weight: 500;
+      color: #505458;
+      letter-spacing: 0.5px;
+      margin-top: 2px;
+    }
 
     #palette-chips {
-      margin-top: 20px;
+      margin-top: 24px;
       display: flex;
       flex-direction: column;
-      gap: 5px;
+      gap: 6px;
     }
     .chip {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
+      padding: 4px 0;
+      cursor: default;
     }
     .chip-dot {
-      width: 12px;
-      height: 12px;
+      width: 14px;
+      height: 14px;
       flex-shrink: 0;
     }
     .chip-label {
       font-size: 11px;
       font-weight: 400;
       color: #909498;
-      letter-spacing: 0.2px;
+      letter-spacing: 0.3px;
+    }
+    .chip-hex {
+      font-size: 9px;
+      font-family: 'SF Mono', 'Consolas', monospace;
+      color: #505458;
+      margin-left: auto;
+      opacity: 0;
+      transition: opacity 0.15s;
+    }
+    .chip:hover .chip-hex {
+      opacity: 1;
     }
     #preview-addr {
-      margin-top: 16px;
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid #1a1c1e;
       font-size: 10px;
       font-family: 'SF Mono', 'Consolas', monospace;
-      color: #707478;
-      max-width: 160px;
+      color: #606468;
+      max-width: 180px;
       word-break: break-all;
-      line-height: 1.6;
+      line-height: 1.7;
+      cursor: pointer;
+      transition: color 0.15s;
+    }
+    #preview-addr:hover {
+      color: #909498;
+    }
+    #preview-addr.copied {
+      color: #70a070;
     }
 
     /* ── Gallery (column 2) ── */
-    #gallery-pane { flex: 1; min-width: 400px; max-width: 560px; }
+    #gallery-pane {
+      flex: 1;
+      min-width: 420px;
+      max-width: 560px;
+    }
+    #gallery-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #1a1c1e;
+    }
+    #gallery-title {
+      font-size: 10px;
+      font-weight: 600;
+      color: #707478;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+    #gallery-count {
+      font-size: 10px;
+      font-weight: 400;
+      color: #484c50;
+      font-style: italic;
+    }
     #gallery {
       display: grid;
       grid-template-columns: repeat(14, 1fr);
-      gap: 2px;
+      gap: 3px;
       line-height: 0;
-      background: #0e0f10;
-      padding: 2px;
     }
     .gallery-item {
       cursor: pointer;
       position: relative;
       z-index: 0;
       opacity: 0.88;
-      transition: opacity 0.15s;
+      transition: opacity 0.2s;
+    }
+    .gallery-item::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 15%;
+      right: 15%;
+      height: 2px;
+      background: transparent;
+      transition: background 0.15s;
     }
     .gallery-item:hover {
       opacity: 1;
-      z-index: 1;
     }
     .gallery-item.selected {
       opacity: 1;
-      outline: 2px solid #707478;
-      outline-offset: -2px;
-      z-index: 2;
+    }
+    .gallery-item.selected::after {
+      background: rgba(255,255,255,0.5);
     }
     .gallery-item canvas { display: block; width: 100%; height: auto; }
 
     /* ── All palettes (column 3) ── */
-    #palettes-pane { flex-shrink: 0; width: 380px; }
+    #palettes-pane {
+      flex-shrink: 0;
+      width: 380px;
+    }
+    #palettes-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #1a1c1e;
+    }
+    #palettes-title {
+      font-size: 10px;
+      font-weight: 600;
+      color: #707478;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+    #palettes-count {
+      font-size: 10px;
+      font-weight: 400;
+      color: #484c50;
+      font-style: italic;
+    }
     #palettes-grid {
       display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 10px;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 10px 8px;
     }
-    .palette-item {
-      text-align: center;
+    .palette-swatch {
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      min-width: 0;
     }
-    .palette-item canvas {
-      display: block;
-      width: 100%;
-      height: auto;
+    .swatch-bars {
+      display: flex;
+      flex-direction: column;
+      height: 48px;
+      overflow: hidden;
+      opacity: 0.85;
+      transition: opacity 0.15s;
+    }
+    .palette-swatch:hover .swatch-bars {
+      opacity: 1;
+    }
+    .palette-swatch.active .swatch-bars {
+      opacity: 1;
+    }
+    .swatch-bar {
+      flex: 1;
     }
     .palette-name {
       font-size: 9px;
       font-weight: 500;
-      color: #808488;
+      color: #606468;
       margin-top: 6px;
       letter-spacing: 0.2px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      text-align: center;
+      transition: color 0.15s;
+    }
+    .palette-swatch.active .palette-name {
+      color: #a0a4a8;
+    }
+
+    /* ── Footer ── */
+    #footer {
+      border-top: 1px solid #1a1c1e;
+      padding: 24px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+    }
+    #footer a {
+      font-size: 10px;
+      font-weight: 500;
+      color: #505458;
+      text-decoration: none;
+      letter-spacing: 0.5px;
+      transition: color 0.2s;
+    }
+    #footer a:hover {
+      color: #909498;
+    }
+    #footer .divider {
+      width: 3px;
+      height: 3px;
+      background: #303438;
+      border-radius: 50%;
+    }
+    #footer .copyright {
+      font-size: 10px;
+      color: #383c40;
+      letter-spacing: 0.3px;
     }
 
     /* ── Mobile: single column ── */
+    @media (max-width: 1100px) {
+      #main { gap: 40px; }
+      #gallery-pane { min-width: 360px; }
+      #palettes-pane { width: 320px; }
+      #palettes-grid { grid-template-columns: repeat(6, 1fr); }
+    }
+
     @media (max-width: 900px) {
-      body { padding: 28px 20px; }
-      #header { margin-bottom: 28px; }
-      #controls { margin-bottom: 32px; }
+      #container { padding: 32px 24px; }
+      #controls { margin-bottom: 36px; }
       #main {
         flex-direction: column;
         align-items: center;
-        gap: 36px;
+        gap: 40px;
       }
       #preview-pane {
         width: 100%;
@@ -203,47 +365,39 @@
         flex-direction: column;
         align-items: center;
       }
+      #preview-addr { text-align: center; }
       #gallery-pane {
         width: 100%;
         min-width: unset;
         max-width: 100%;
       }
-      #gallery {
-        grid-template-columns: repeat(10, 1fr);
-      }
+      #gallery { grid-template-columns: repeat(10, 1fr); }
       #palettes-pane {
         width: 100%;
         max-width: 100%;
       }
-      #palettes-grid {
-        grid-template-columns: repeat(6, 1fr);
-      }
+      #palettes-grid { grid-template-columns: repeat(6, 1fr); }
+      #footer { padding: 20px 24px; }
     }
 
     @media (max-width: 600px) {
-      body { padding: 20px 16px; }
+      #container { padding: 24px 16px; }
       #controls {
         flex-direction: column;
         align-items: stretch;
         gap: 12px;
       }
       #addr-input { width: 100%; }
-      #randomize-btn { width: 100%; padding: 11px 14px; }
-      #gallery {
-        grid-template-columns: repeat(7, 1fr);
-      }
-      #palettes-grid {
-        grid-template-columns: repeat(5, 1fr);
-      }
+      #randomize-btn { width: 100%; padding: 12px 18px; }
+      #gallery { grid-template-columns: repeat(7, 1fr); }
+      #palettes-grid { grid-template-columns: repeat(4, 1fr); }
+      #footer { flex-direction: column; gap: 12px; }
+      #footer .divider { display: none; }
     }
   </style>
 </head>
 <body>
   <div id="container">
-
-    <div id="header">
-      <h1>Monblockies</h1>
-    </div>
 
     <div id="controls">
       <div>
@@ -255,34 +409,53 @@
 
     <div id="main">
       <div id="preview-pane">
-        <div id="preview-frame">
-          <canvas id="preview-canvas"></canvas>
+        <div id="preview-section">
+          <div id="preview-frame">
+            <canvas id="preview-canvas"></canvas>
+          </div>
+          <div id="palette-name"></div>
+          <div id="palette-index"></div>
         </div>
         <div id="palette-chips"></div>
         <div id="preview-addr"></div>
       </div>
 
       <div id="gallery-pane">
+        <div id="gallery-header">
+          <span id="gallery-title">Collection</span>
+          <span id="gallery-count">196 specimens</span>
+        </div>
         <div id="gallery"></div>
       </div>
 
       <div id="palettes-pane">
+        <div id="palettes-header">
+          <span id="palettes-title">Palettes</span>
+          <span id="palettes-count"></span>
+        </div>
         <div id="palettes-grid"></div>
       </div>
     </div>
   </div>
+
+  <footer id="footer">
+    <a href="https://github.com/stompgg/monblockies" target="_blank" rel="noopener">GitHub</a>
+    <span class="divider"></span>
+    <span class="copyright">Open Source</span>
+  </footer>
 
   <script>
     // ── State ──────────────────────────────────────────────────────────────────
     var CELL = 2;
     var GALLERY_COLS = 14;
     var GALLERY_ROWS = 14;
-    var GALLERY_COUNT = GALLERY_COLS * GALLERY_ROWS; // 98 - fills all rows
+    var GALLERY_COUNT = GALLERY_COLS * GALLERY_ROWS;
 
     var state = {
       seed:     0,
       selected: null,
       custom:   '',
+      palette:  null,  // null = auto, otherwise palette index
     };
 
     // ── Address generation ─────────────────────────────────────────────────────
@@ -299,11 +472,11 @@
 
     // ── Palette chips ──────────────────────────────────────────────────────────
     var CHIP_DEFS = [
-      { key: 'outline', label: 'Outline'   },
-      { key: 'body',    label: 'Body'      },
+      { key: 'outline', label: 'Outline' },
+      { key: 'body',    label: 'Body' },
       { key: 'hi',      label: 'Highlight' },
-      { key: 'mark',    label: 'Marking'   },
-      { key: 'eye',     label: 'Eye'       },
+      { key: 'mark',    label: 'Marking' },
+      { key: 'eye',     label: 'Eye' },
       { key: null,      label: 'Shine', color: '#ffffff' },
     ];
 
@@ -320,8 +493,12 @@
         var lbl = document.createElement('span');
         lbl.className = 'chip-label';
         lbl.textContent = def.label;
+        var hex = document.createElement('span');
+        hex.className = 'chip-hex';
+        hex.textContent = color.toUpperCase();
         div.appendChild(dot);
         div.appendChild(lbl);
+        div.appendChild(hex);
         el.appendChild(div);
       });
     }
@@ -329,18 +506,29 @@
     // ── Preview ────────────────────────────────────────────────────────────────
     function updatePreview(addr) {
       var canvas = document.getElementById('preview-canvas');
-      MonBlockies.render(canvas, addr, 32);
+      var palIdx = state.palette;
+      MonBlockies.render(canvas, addr, 32, palIdx);
       canvas.style.width  = '128px';
       canvas.style.height = '128px';
       canvas.style.imageRendering = 'pixelated';
 
-      var sprite = MonBlockies.generate(addr);
+      var sprite = MonBlockies.generate(addr, palIdx);
       renderChips(sprite.pal);
+
+      // Show palette name and index
+      var actualIdx = MonBlockies.PALETTES.indexOf(sprite.pal);
+      document.getElementById('palette-name').textContent = sprite.pal.name;
+      document.getElementById('palette-index').textContent = 'Palette ' + (actualIdx + 1) + ' of ' + MonBlockies.PALETTES.length;
 
       document.getElementById('preview-addr').textContent = addr;
 
       // Update favicon to match selected blockie (transparent background)
-      document.getElementById('favicon').href = MonBlockies.toDataURL(addr, 32, null, true);
+      document.getElementById('favicon').href = MonBlockies.toDataURL(addr, 32, palIdx, true);
+
+      // Update active swatch
+      document.querySelectorAll('.palette-swatch').forEach(function (el, i) {
+        el.classList.toggle('active', i === actualIdx);
+      });
     }
 
     // ── Gallery ────────────────────────────────────────────────────────────────
@@ -360,43 +548,64 @@
         wrap.appendChild(canvas);
         wrap.addEventListener('click', function () {
           state.selected = addr;
+          state.palette = null;  // reset to auto
           render();
         });
         gallery.appendChild(wrap);
       });
+
+      // Update count
+      document.getElementById('gallery-count').textContent = addrs.length + ' specimens';
     }
 
     // ── All Palettes Grid ──────────────────────────────────────────────────────
-    function buildPalettesGrid(addr) {
+    var SWATCH_COLORS = ['outline', 'body', 'hi', 'mark', 'eye'];
+
+    function buildPalettesGrid() {
       var grid = document.getElementById('palettes-grid');
       grid.innerHTML = '';
       MonBlockies.PALETTES.forEach(function (pal, i) {
-        var item = document.createElement('div');
-        item.className = 'palette-item';
+        var swatch = document.createElement('div');
+        swatch.className = 'palette-swatch';
 
-        var canvas = MonBlockies.createCanvas(addr, 48, i);
-        canvas.style.imageRendering = 'pixelated';
+        var bars = document.createElement('div');
+        bars.className = 'swatch-bars';
+        SWATCH_COLORS.forEach(function (key) {
+          var bar = document.createElement('div');
+          bar.className = 'swatch-bar';
+          bar.style.background = pal[key];
+          bars.appendChild(bar);
+        });
 
         var name = document.createElement('div');
         name.className = 'palette-name';
         name.textContent = pal.name;
 
-        item.appendChild(canvas);
-        item.appendChild(name);
-        grid.appendChild(item);
+        swatch.appendChild(bars);
+        swatch.appendChild(name);
+        swatch.addEventListener('click', function () {
+          state.palette = i;
+          updatePreview(getFocus());
+        });
+        grid.appendChild(swatch);
       });
     }
 
     // ── Full render ────────────────────────────────────────────────────────────
+    var currentList = [];
+
     function render() {
       var addrs   = galleryAddrs(state.seed);
       var custom  = state.custom.trim();
-      var list    = custom ? [custom].concat(addrs.slice(0, GALLERY_COUNT - 1)) : addrs;
-      var focus   = state.selected || list[0];
+      currentList = custom ? [custom].concat(addrs.slice(0, GALLERY_COUNT - 1)) : addrs;
+      var focus   = state.selected || currentList[0];
 
       updatePreview(focus);
-      buildGallery(list, focus);
-      buildPalettesGrid(focus);
+      buildGallery(currentList, focus);
+    }
+
+    function getFocus() {
+      return state.selected || currentList[0];
     }
 
     // ── Controls ───────────────────────────────────────────────────────────────
@@ -412,10 +621,22 @@
       render();
     });
 
+    // ── Click to copy address ─────────────────────────────────────────────────
+    document.getElementById('preview-addr').addEventListener('click', function () {
+      var addr = this.textContent;
+      navigator.clipboard.writeText(addr).then(function () {
+        var el = document.getElementById('preview-addr');
+        el.classList.add('copied');
+        setTimeout(function () { el.classList.remove('copied'); }, 600);
+      });
+    });
+
     // ── Favicon ─────────────────────────────────────────────────────────────────
     document.getElementById('favicon').href = MonBlockies.toDataURL('monblockies', 32, null, true);
 
     // ── Init ───────────────────────────────────────────────────────────────────
+    buildPalettesGrid();
+    document.getElementById('palettes-count').textContent = MonBlockies.PALETTES.length + ' colorways';
     render();
   </script>
 </body>
